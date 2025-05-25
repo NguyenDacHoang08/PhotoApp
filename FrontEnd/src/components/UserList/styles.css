@@ -1,0 +1,8 @@
+.user{
+    color: hsl(250, 100%, 35%);
+    padding: 3px 7px;
+    border-radius: 10px;
+}
+.item:hover{
+    background-color: hsl(0, 0%, 90%);
+}
