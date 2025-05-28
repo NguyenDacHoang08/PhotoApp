@@ -3,8 +3,8 @@ const router = express.Router();
 const Photo = require("../db/photoModel");
 const User = require("../db/userModel");
 
-// GET /api/photo/user/:id
-router.get("/user/:id", async (req, res) => {
+// GET /api/photo/photoOfUser/:id
+router.get("/photoOfUser/:id", async (req, res) => {
   try {
     const photos = await Photo.find({ user_id: req.params.id })
       .select("_id user_id comments file_name date_time")

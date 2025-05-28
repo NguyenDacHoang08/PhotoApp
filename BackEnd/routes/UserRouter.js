@@ -1,26 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const Photo = require("../db/photoModel");
 const User = require("../db/userModel");
 
-// GET /api/photo/user/:id
-router.get("/user/:id", async (req, res) => {
+// GET /api/user/list
+router.get("/list", async (req, res) =>{
+  try{
+    const users = await User.find();
+    res.status(200).json(users);
+  }
+  catch(err){
+    res.status(400).json({Error: "Something went wrong!"})
+  }
+});
+
+// GET api/user/:id
+router.get("/:id", async (req, res) => {
   try {
-    const photos = await Photo.find({ user_id: req.params.id })
-      .select("_id user_id comments file_name date_time")
-      .lean();
-
-    for (let photo of photos) {
-      for (let comment of photo.comments) {
-        const commenter = await User.findById(comment.user_id)
-          .select("_id first_name last_name")
-          .lean();
-        comment.user = commenter;
-        delete comment.user_id;
-      }
+    const user = await User.findById(req.params.id);
+    if(user){
+      res.status(200).json(user);
     }
-
-    res.status(200).json(photos);
+    else{
+      res.status(404).json({error: "Can't find user"});
+    }
   } catch (err) {
     res.status(400).json({ error: "Invalid user ID or server error" });
   }

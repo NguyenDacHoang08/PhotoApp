@@ -8,13 +8,14 @@ const Photo = require("../db/photoModel.js");
 const SchemaInfo = require("../db/schemaInfo.js");
 
 const versionString = "1.0";
+const connectDB = "mongodb://localhost:27017/photoApp";
 
 async function dbLoad() {
   try {
-    await mongoose.connect(process.env.DB_URL);
-    console.log("Successfully connected to MongoDB Atlas!");
+    await mongoose.connect(connectDB);
+    console.log("Successfully connected to MongoDB");
   } catch (error) {
-    console.log("Unable connecting to MongoDB Atlas!");
+    console.log("Unable connecting to MongoDB");
   }
 
   await User.deleteMany({});
@@ -25,7 +26,7 @@ async function dbLoad() {
   const mapFakeId2RealId = {};
   for (const user of userModels) {
     userObj = new User({
-      first: user.first_name,
+      first_name: user.first_name,
       last_name: user.last_name,
       location: user.location,
       description: user.description,

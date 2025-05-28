@@ -2,13 +2,16 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 async function dbConnect() {
+
+  const connectDB = "mongodb://localhost:27017/photoApp";
+
   mongoose
-    .connect(process.env.DB_URL)
+    .connect(connectDB)
     .then(() => {
-      console.log("Successfully connected to MongoDB Atlas!");
+      console.log("Successfully connected to MongoDB");
     })
     .catch((error) => {
-      console.log("Unable to connect to MongoDB Atlas!");
+      console.log("Unable to connect to MongoDB");
       console.error(error);
     });
 }

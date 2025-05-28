@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Môi trường & cấu hình riêng
+.env
+
+# Thư mục JetBrains IDE (WebStorm, IntelliJ, PyCharm)
+.idea/
+
+# File log hoặc tạm
+*.log
+
+# Hệ điều hành (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Lock files (tùy bạn dùng npm hay yarn)
+package-lock.json
+yarn.lock

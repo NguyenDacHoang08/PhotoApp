@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const dbConnect = require("./db/dbConnect");
-const UserRouter = require("./routes/UserRouter");
-const PhotoRouter = require("./routes/PhotoRouter");
+const UserRouter = require("./Routes/UserRouter");
+const PhotoRouter = require("./Routes/PhotoRouter");
 const CommentRouter = require("./routes/CommentRouter");
 
 dbConnect();
