@@ -1,12 +1,66 @@
+/* === Global reset & base === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+}
+
+a {
+  color: #1976d2;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #1565c0;
+}
+
+/* === Topbar buffer === */
 .main-topbar-buffer {
   margin-top: 70px;
 }
 
+/* === Layout grid item === */
 .main-grid-item {
   height: calc(100vh - 15px);
   padding: 10px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-a {
-  text-decoration: none;
+/* === Scrollbar styling for modern browsers === */
+.main-grid-item::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-grid-item::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.main-grid-item::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .main-grid-item {
+    height: auto;
+    padding: 8px;
+  }
+
+  .main-topbar-buffer {
+    margin-top: 60px;
+  }
 }

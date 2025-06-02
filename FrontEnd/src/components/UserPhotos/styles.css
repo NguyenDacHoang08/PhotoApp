@@ -1,21 +1,69 @@
-img{
-    max-width: 280px;
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
+.photo-list {
+  padding: 16px;
 }
-.post{
-    display: flex;
-    flex-direction: column;
+
+.photo-item {
+  align-items: flex-start;
+  padding: 16px 0;
 }
-.cmt-title{
-    display: inline;
+
+.photo-card {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
-.photoTime{
-    display: inline;
+
+.photo-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 12px;
+  border-radius: 4px;
 }
-.cmt-body{
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+
+.photo-time {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.comment-list {
+  margin-top: 12px;
+  padding-left: 16px;
+}
+
+.comment-title {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.comment-item {
+  padding: 6px 0;
+}
+
+.comment-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-user {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.comment-text {
+  font-size: 0.95rem;
+  margin-left: 8px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  color: #888;
 }

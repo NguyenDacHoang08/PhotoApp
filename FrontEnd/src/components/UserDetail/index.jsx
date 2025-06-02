@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Typography, CircularProgress, Box } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
+import TopBar from "../TopBar";
 
 import "./styles.css";
 
@@ -47,24 +48,27 @@ function UserDetail() {
     );
   }
 
- return (
-  <div className="user-detail-container">
-    <Typography variant="h6" gutterBottom>
-      User Infomation
-    </Typography>
+  return (
+    <>
+      <TopBar context={`${user.first_name} ${user.last_name}'s infomation`}/>
+      <div className="user-detail-container">
+        <Typography variant="h6" gutterBottom>
+          User Infomation
+        </Typography>
 
-    <div className="user-detail-info">
-      <Typography variant="body1"><b>Full name:</b> {user.first_name} {user.last_name}</Typography>
-      <Typography variant="body1"><b>Location:</b> {user.location}</Typography>
-      <Typography variant="body1"><b>Description:</b> {user.description}</Typography>
-      <Typography variant="body1"><b>Occupation:</b> {user.occupation}</Typography>
-    </div>
+        <div className="user-detail-info">
+          <Typography variant="body1"><b>Full name:</b> {user.first_name} {user.last_name}</Typography>
+          <Typography variant="body1"><b>Location:</b> {user.location}</Typography>
+          <Typography variant="body1"><b>Description:</b> {user.description}</Typography>
+          <Typography variant="body1"><b>Occupation:</b> {user.occupation}</Typography>
+        </div>
 
-    <Link to={`/photos/${user._id}`} className="btn">
-      Photos
-    </Link>
-  </div>
-);
+        <Link to={`/photos/${user._id}`} className="btn">
+          Photos
+        </Link>
+      </div>
+    </>
+  );
 
 }
 

@@ -1,21 +1,26 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
-
 import "./styles.css";
 
 /**
- * Define TopBar, a React component of Project 4.
+ * TopBar component.
+ * @param {Object} props - Component props
+ * @param {string} props.context - Context string to display on the right
  */
-function TopBar () {
-    return (
-      <AppBar className="topbar-appBar" position="absolute">
-        <Toolbar>
-          <Typography variant="h5" color="inherit">
-            Nguyen Dac Hoang
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    );
+function TopBar({ context }) {
+  return (
+    <AppBar position="absolute" className="topbar-appBar" elevation={2}>
+      <Toolbar className="topbar-toolbar">
+        <Typography variant="h6" className="topbar-title">
+          Nguyen Dac Hoang
+        </Typography>
+        <Typography variant="subtitle1" className="topbar-context">
+          {context}
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
 }
 
 export default TopBar;
+

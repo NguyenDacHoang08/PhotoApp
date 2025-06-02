@@ -57,7 +57,6 @@ function UserList() {
                   className="user"
                 />
               </ListItem>
-
               <Divider />
             </React.Fragment>
           ))

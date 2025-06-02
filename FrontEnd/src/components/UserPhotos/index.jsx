@@ -1,67 +1,88 @@
 import { React, useState, useEffect } from "react";
-
-import "./styles.css";
 import { useParams } from "react-router-dom";
-import models from "../../modelData/models";
 import {
   Divider,
   List,
   ListItem,
+  Collapse,
+  Typography
 } from "@mui/material";
+import "./styles.css";
 
-/**
- * Define UserPhotos, a React component of Project 4.
- */
 function formatDateTime(datetime) {
   return new Date(datetime).toLocaleString();
 }
+
 function UserPhotos() {
   const { userId } = useParams();
   const [photos, setPhotos] = useState(null);
-  const [user, setUser] = useState(null);
+  const [expandedComments, setExpandedComments] = useState({}); // lưu trạng thái mở của từng photo
 
   useEffect(() => {
-    const fetchedPhotos = models.photoOfUserModel(userId);
-    setPhotos(fetchedPhotos || []);
-    const fetchedUser = models.userModel(userId);
-    setUser(fetchedUser);
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:8081/api/photo/photoOfUser/${userId}`);
+        if (!response.ok) throw new Error("Can't get data");
+
+        const data = await response.json();
+        setPhotos(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
   }, [userId]);
 
-  if (!photos || !user) return <div>Loading...</div>;
+  const toggleComments = (photoId) => {
+    setExpandedComments((prev) => ({
+      ...prev,
+      [photoId]: !prev[photoId],
+    }));
+  };
+
+  if (!photos) return <div className="loading">Loading...</div>;
 
   return (
-    <>
-      <h3>{user.first_name} {user.last_name}'s Photos</h3>
-      <List component="div">
-        {photos.map((photo) => (
-          <>
-            <ListItem className>
-              <div className="post">
-                <div className="photo">
-                  <img src={`/images/${photo.file_name}`} alt="photos" />
-                </div>
-                <div>
-                  <p className="photoTime"><b>Time: </b><i>{formatDateTime(photo.date_time)}</i></p>
-                </div>
-                <List component="div" className="comment">
-                  {photo.comments && <b className="cmt-title">Comments: </b>}
-                  {(photo.comments || []).map((cm) => (
-                    <ListItem key={cm._id}>
-                      <div className="cmt-body">
-                        <span><b>{cm.user.first_name} {cm.user.last_name}: </b><i><small>{formatDateTime(cm.date_time)}</small></i></span>
-                        <span>{cm.comment}</span>
+    <List className="photo-list">
+      {photos.map((photo) => (
+        <div key={photo._id}>
+          <ListItem className="photo-item">
+            <div className="photo-card">
+              <img className="photo-img" src={`/images/${photo.file_name}`} alt="User post" />
+              <p className="photo-time"><b>Time:</b> <i>{formatDateTime(photo.date_time)}</i></p>
+
+              {photo.comments && (
+                <Typography
+                  className="comment-toggle"
+                  onClick={() => toggleComments(photo._id)}
+                  style={{ cursor: 'pointer', color: '#3f51b5' }}
+                >
+                  💬 Comments ({photo.comments.length})
+                </Typography>
+              )}
+
+              <Collapse in={expandedComments[photo._id]} timeout="auto" unmountOnExit>
+                <List className="comment-list">
+                  {photo.comments.map((cm) => (
+                    <ListItem key={cm._id} className="comment-item">
+                      <div className="comment-body">
+                        <span className="comment-user">
+                          <b>{cm.user.first_name} {cm.user.last_name}:</b>
+                          <i><small> {formatDateTime(cm.date_time)}</small></i>
+                        </span>
+                        <span className="comment-text">{cm.comment}</span>
                       </div>
                     </ListItem>
                   ))}
                 </List>
-              </div>
-
-            </ListItem>
-            <Divider />
-          </>
-        ))}
-      </List>
-    </>
+              </Collapse>
+            </div>
+          </ListItem>
+          <Divider />
+        </div>
+      ))}
+    </List>
   );
 }
 
