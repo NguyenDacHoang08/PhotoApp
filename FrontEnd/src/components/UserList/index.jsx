@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Divider,
   List,
@@ -6,41 +6,65 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-
-import "./styles.css";
-import models from "../../modelData/models";
 import { Link } from "react-router-dom";
+import "./styles.css";
 
-/**
- * Define UserList, a React component of Project 4.
- */
-function UserList () {
-    const users = models.userListModel();
-    return (
-      <div>
-        {/* <Typography variant="body1">
-          This is the user list, which takes up 3/12 of the window. You might
-          choose to use <a href="https://mui.com/components/lists/">Lists</a>{" "}
-          and <a href="https://mui.com/components/dividers/">Dividers</a> to
-          display your users like so:
-        </Typography> */}
-        <List component="nav">
-          {users.map((item) => (
-            <>
-              <ListItem className="item">
-                <Link to={`/users/${item._id}`} className="user">
-                  <ListItemText primary={item.first_name + " " + item.last_name}/>
-                </Link>
+function UserList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:8081/api/user/list");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setUsers(data);
+      } catch (err) {
+        console.error("Lỗi khi tải danh sách người dùng:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <List component="nav">
+        {loading ? (
+          <Typography variant="body2" sx={{ m: 2 }}>
+            Đang tải...
+          </Typography>
+        ) : users.length === 0 ? (
+          <Typography variant="body2" sx={{ m: 2 }}>
+            Không có người dùng nào.
+          </Typography>
+        ) : (
+          users.map((item) => (
+            <React.Fragment key={item._id}>
+              <ListItem
+                button
+                component={Link}
+                to={`/users/${item._id}`}
+                className="item"
+              >
+                <ListItemText
+                  primary={`${item.first_name} ${item.last_name}`}
+                  className="user"
+                />
               </ListItem>
+
               <Divider />
-            </>
-          ))}
-        </List>
-        <Typography variant="body1">
-          The model comes in from models.userListModel()
-        </Typography>
-      </div>
-    );
+            </React.Fragment>
+          ))
+        )}
+      </List>
+    </div>
+  );
 }
 
 export default UserList;

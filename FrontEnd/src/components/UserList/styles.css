@@ -1,8 +1,18 @@
-.user{
-    color: hsl(250, 100%, 35%);
-    padding: 3px 7px;
-    border-radius: 10px;
+.user {
+  color: hsl(250, 100%, 40%);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: block;
+  transition: background-color 0.3s, color 0.3s;
 }
-.item:hover{
-    background-color: hsl(0, 0%, 90%);
+
+.user:hover {
+  color: hsl(250, 100%, 25%);
+}
+
+.item {
+  border-radius: 8px;
+  margin: 4px 0;
 }

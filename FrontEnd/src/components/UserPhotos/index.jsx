@@ -27,7 +27,6 @@ function UserPhotos() {
     setUser(fetchedUser);
   }, [userId]);
 
-  console.log(photos);
   if (!photos || !user) return <div>Loading...</div>;
 
   return (
