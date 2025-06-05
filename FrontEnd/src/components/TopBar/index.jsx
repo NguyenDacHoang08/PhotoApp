@@ -1,21 +1,26 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
-/**
- * TopBar component.
- * @param {Object} props - Component props
- * @param {string} props.context - Context string to display on the right
- */
-function TopBar({ context }) {
+function TopBar({ onLogOut }) {
+  const saveUser = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    if (onLogOut) onLogOut();          
+    navigate("/");                
+  };
+
   return (
     <AppBar position="absolute" className="topbar-appBar" elevation={2}>
       <Toolbar className="topbar-toolbar">
         <Typography variant="h6" className="topbar-title">
-          Nguyen Dac Hoang
+          Hello {saveUser?.login_name || "Guest"}
         </Typography>
-        <Typography variant="subtitle1" className="topbar-context">
-          {context}
+        <Typography variant="h6" className="topbar-context">
+          <span onClick={handleLogout} className="logout">Logout</span>
         </Typography>
       </Toolbar>
     </AppBar>
@@ -23,4 +28,5 @@ function TopBar({ context }) {
 }
 
 export default TopBar;
+
 

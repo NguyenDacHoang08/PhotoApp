@@ -34,10 +34,13 @@ function UserList() {
 
   return (
     <div>
+      <Typography variant="h6" sx={{ m: 2 }}>
+        User List
+      </Typography>
       <List component="nav">
         {loading ? (
           <Typography variant="body2" sx={{ m: 2 }}>
-            Đang tải...
+            Loading...
           </Typography>
         ) : users.length === 0 ? (
           <Typography variant="body2" sx={{ m: 2 }}>

@@ -53,24 +53,30 @@ const schemaInfo = {
 
 const im = {
   _id: "57231f1a30e4351f4e9f4bd7",
+  login_name: "IanMalcolm",
   first_name: "Ian",
   last_name: "Malcolm",
+  password: "123456789",
   location: "Austin, TX",
   description: "Should've stayed in the car.",
   occupation: "Mathematician",
 };
 const er = {
   _id: "57231f1a30e4351f4e9f4bd8",
+  login_name: "EllenRipley",
   first_name: "Ellen",
   last_name: "Ripley",
+  password: "123456789",
   location: "Nostromo",
   description: "Lvl 6 rating. Pilot.",
   occupation: "Warrant Officer",
 };
 const pt = {
   _id: "57231f1a30e4351f4e9f4bd9",
+  login_name: "PeregrinTook",
   first_name: "Peregrin",
   last_name: "Took",
+  password: "123456789",
   location: "Gondor",
   description:
     "Home is behind, the world ahead... " +
@@ -81,24 +87,30 @@ const pt = {
 };
 const rk = {
   _id: "57231f1a30e4351f4e9f4bda",
+  login_name: "ReyKenobi",
   first_name: "Rey",
   last_name: "Kenobi",
+  password: "123456789",
   location: "D'Qar",
   description: "Excited to be here!",
   occupation: "Rebel",
 };
 const al = {
   _id: "57231f1a30e4351f4e9f4bdb",
+  login_name: "AprilLudgate",
   first_name: "April",
   last_name: "Ludgate",
+  password: "123456789",
   location: "Pawnee, IN",
   description: "Witch",
   occupation: "Animal Control",
 };
 const jo = {
   _id: "57231f1a30e4351f4e9f4bdc",
+  login_name: "JohnOusterhout",
   first_name: "John",
   last_name: "Ousterhout",
+  password: "123456789",
   location: "Stanford, CA",
   description: "<i>CS142!</i>",
   occupation: "Professor",

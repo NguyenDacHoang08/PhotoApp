@@ -50,7 +50,6 @@ function UserDetail() {
 
   return (
     <>
-      <TopBar context={`${user.first_name} ${user.last_name}'s infomation`}/>
       <div className="user-detail-container">
         <Typography variant="h6" gutterBottom>
           User Infomation
